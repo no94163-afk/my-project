@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>EmotiScan AI - Offline</title>
+    <!-- استدعاء مكتبة الذكاء الاصطناعي -->
+    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/dist/face-api.js"></script>
+    <!-- ربط ملف التنسيق -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="phone">
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="notch"></div>
+    <span>OFFLINE AI</span>
+  </div>
+
+  <div class="header">
+    <div class="header-left">
+      <div class="app-eyebrow">EmotiScan AI</div>
+      <div class="app-title">Emotion Detector</div>
+    </div>
+    <div class="server-indicator">
+      <div class="dot busy" id="dot"></div>
+      <span id="serverStatus">Loading AI...</span>
+    </div>
+  </div>
+
+  <div class="upload-zone" id="zone">
+    <img class="preview" id="preview" alt="uploaded face">
+    <div class="placeholder" id="placeholder">
+      <svg class="cam-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+      <div class="upload-hint">Tap to upload photo</div>
+      <div class="upload-sub">Step 1 — select a face image</div>
+    </div>
+    <input type="file" accept="image/*" id="fileInput" onchange="handleFile(event)">
+  </div>
+
+  <div class="section">
+    <div class="section-label">Local Processing Pipeline</div>
+    <div class="steps">
+      <div class="step" id="s1"><div class="step-n">1</div><div class="step-label">User uploads image</div><div class="step-ico">📱</div></div>
+      <div class="step" id="s2"><div class="step-n">2</div><div class="step-label">Local AI finds face</div><div class="step-ico">🔍</div></div>
+      <div class="step" id="s3"><div class="step-n">3</div><div class="step-label">Local AI analyzes expressions</div><div class="step-ico">🧠</div></div>
+      <div class="step" id="s4"><div class="step-n">4</div><div class="step-label">Generate confidence scores</div><div class="step-ico">📊</div></div>
+      <div class="step" id="s5"><div class="step-n">5</div><div class="step-label">Display emotion</div><div class="step-ico">✨</div></div>
+    </div>
+  </div>
+
+  <div class="btn-wrap">
+    <button class="btn" id="btn" disabled onclick="analyze()">
+      <span id="btnLabel"><div class="spinner"></div> Downloading AI Models...</span>
+    </button>
+  </div>
+
+  <div class="err-box" id="errBox"></div>
+
+  <div class="result" id="resultCard">
+    <div class="result-head">
+      <div class="result-eyebrow">Detection Result</div>
+      <div class="emotion-row">
+        <div class="emotion-emoji" id="rEmoji">😊</div>
+        <div>
+          <div class="emotion-name" id="rName">Happy</div>
+          <div class="emotion-conf" id="rConf">Confidence: 94%</div>
+        </div>
+      </div>
+    </div>
+    <div class="bars" id="rBars"></div>
+  </div>
+
+  <div class="rec-card" id="recCard">
+    <div class="rec-head">
+      <span class="rec-tag">💡 For You</span>
+      <span class="rec-type-pill" id="recType">Activity</span>
+    </div>
+    <div class="rec-body">
+      <span class="rec-icon" id="recIcon">🎯</span>
+      <div class="rec-text" id="recText">Here's your personalized recommendation.</div>
+      <div class="rec-sub" id="recSub"></div>
+    </div>
+  </div>
+
+  <div class="offline-badge">
+    ✨ Running 100% locally and completely free in your browser.
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="history-section">
+    <div class="history-header">
+      <div class="history-title">📋 Detection History</div>
+      <button class="clear-btn" onclick="clearHistory()">Clear History</button>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="tl-empty">
+        <span class="tl-empty-icon">🕑</span>
+        No detections yet.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ربط ملف البرمجة -->
+<script src="script.js"></script>
+</body>
+</html>
